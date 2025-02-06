@@ -1,7 +1,9 @@
 // Create a new IndexedDB database
 const request = window.indexedDB.open('plantCareTips', 1);
 
-fetch('http://localhost:3000/tips')
+
+
+fetch('http://localhost:3000/tips?species=' + "Roses")
   .then(response => response.json())
   .then(data => {
     const tipsDiv = document.getElementById('tips');
@@ -11,6 +13,21 @@ fetch('http://localhost:3000/tips')
       tipsDiv.appendChild(tipElement);
     });
   });
+
+document.getElementById('species-select').addEventListener('change', function() {
+  const tipsDiv = document.getElementById('tips');
+  tipsDiv.innerHTML = ''; // Clear the tips div
+  fetch('http://localhost:3000/tips?species=' + this.value)
+  .then(response => response.json())
+  .then(data => {
+    const tipsDiv = document.getElementById('tips');
+    data.forEach(tip => {
+      const tipElement = document.createElement('p');
+      tipElement.textContent = tip.tip;
+      tipsDiv.appendChild(tipElement);
+    });
+  });
+});
 document.getElementById('add-tip-button').addEventListener('click', () => {
   const newTipInput = document.getElementById('new-tip-input');
   const newTipText = newTipInput.value;

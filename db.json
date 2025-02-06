@@ -3,7 +3,7 @@
     {
       "id": "607",
       "tip": "hi",
-      "species": "roses"
+      "species": "Roses"
     },
     {
       "id": "526",
@@ -15,14 +15,7 @@
       "tip": "eat",
       "species": "roses"
     },
-    {
-      "id": "851",
-      "tip": "abc"
-    },
-    {
-      "id": "385",
-      "tip": "nbc"
-    },
+
     {
       "id": "123",
       "tip": "New tip",
@@ -31,7 +24,7 @@
     {
       "id": "123",
       "tip": "New tip",
-      "species": "roses"
+      "species": "Roses"
     },
     {
       "id": "9e0d",
