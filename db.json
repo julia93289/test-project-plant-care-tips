@@ -1,0 +1,53 @@
+{
+  "tips": [
+    {
+      "id": "607",
+      "tip": "hi",
+      "species": "roses"
+    },
+    {
+      "id": "526",
+      "tip": "water daily",
+      "species": "roses"
+    },
+    {
+      "id": "404",
+      "tip": "eat",
+      "species": "roses"
+    },
+    {
+      "id": "851",
+      "tip": "abc"
+    },
+    {
+      "id": "385",
+      "tip": "nbc"
+    }
+  ],
+  "species": [
+    {
+      "id": "1",
+      "name": "Roses"
+    },
+    {
+      "id": "2",
+      "name": "Lilies"
+    },
+    {
+      "id": "3",
+      "name": "Sunflowers"
+    },
+    {
+      "id": "4",
+      "name": "Daisies"
+    },
+    {
+      "id": "5",
+      "name": "Tulips"
+    },
+    {
+      "id": "e387",
+      "name": "hi"
+    }
+  ]
+}
