@@ -23,7 +23,7 @@ fetch('http://localhost:3000/species')
     });
   });
 
-document.getElementById('add-species').addEventListener('click', () => {
+document.getElementById('add-species-button').addEventListener('click', () => {
   const speciesName = document.getElementById('new-species').value;
   const speciesData = { name: speciesName };
 
@@ -43,11 +43,21 @@ document.getElementById('add-species').addEventListener('click', () => {
   });
 });
 
-document.getElementById("add-new-button").addEventListener("click", function() {
-  var addNewSection = document.getElementById("add-new-section");
-  if (addNewSection.style.display === "none") {
-    addNewSection.style.display = "block";
+
+document.getElementById('addSpeciesBtn').addEventListener('click', () => {
+  const addNewSpeciesSection = document.getElementById('add-new-species-section');
+  if (addNewSpeciesSection.style.display === "none") {
+    addNewSpeciesSection.style.display = "block";
   } else {
-    addNewSection.style.display = "none";
+    addNewSpeciesSection.style.display = "none";
+  }
+});
+
+document.getElementById('addTipBtn').addEventListener('click', () => {
+  const addNewTipSection = document.getElementById('add-new-tip-section');
+  if (addNewTipSection.style.display === "none") {
+    addNewTipSection.style.display = "block";
+  } else {
+    addNewTipSection.style.display = "none";
   }
 });

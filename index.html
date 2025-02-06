@@ -10,32 +10,19 @@
     <h1>Plant Care Tips</h1>
     <button id="addSpeciesBtn">Add New Species</button>
     <button id="addTipBtn">Add New Tip</button>
-    <button id="add-new-button">Add New</button>
     <div id="species-select-container">
         <h2>Select a species:</h2>
         <select id="species-select">
         </select>
     </div>
-    <div id="add-new-section" style="display: none;">
-        <form id="tip-form">
-            <label for="tip">Enter your tip:</label>
-            <input type="text" id="tip" name="tip">
-            <button type="submit">Save Tip</button>
-        </form>
-        <input type="text" id="new-species" placeholder="Enter new species">
-        <button id="add-species">Add Species</button>
-    </div>
     <div id="add-new-tip-section" style="display: none;">
       <h2>Add New Tip</h2>
-      <form id="tip-form-new">
-        <label for="tip">Enter your tip:</label>
-        <input type="text" id="tip-new" name="tip">
-        <button type="submit">Save Tip</button>
-      </form>
+      <input type="text" id="new-tip-input" placeholder="Enter new tip">
+      <button id="add-tip-button">Add Tip</button>
     </div>
     <div id="add-new-species-section" style="display: none;">
       <h2>Add New Species</h2>
-      <input type="text" id="new-species-input" placeholder="Enter new species">
+      <input type="text" id="new-species" placeholder="Enter new species">
       <button id="add-species-button">Add Species</button>
     </div>
     <div id="tips"></div>
