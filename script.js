@@ -11,6 +11,34 @@ fetch('http://localhost:3000/tips')
       tipsDiv.appendChild(tipElement);
     });
   });
+document.getElementById('add-tip-button').addEventListener('click', () => {
+  const newTipInput = document.getElementById('new-tip-input');
+  const newTipText = newTipInput.value;
+  const selectSpecies = document.getElementById('species-select');
+const selectedSpeciesText = selectSpecies.value;
+const tipsDiv = document.getElementById('tips');
+  
+fetch('http://localhost:3000/tips', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    tip: newTipText,
+    species: selectedSpeciesText})
+})
+  .then(response => response.json())
+  .then(data => {
+    const tipElement = document.createElement('p');
+    tipElement.textContent = data.tip;
+    tipsDiv.appendChild(tipElement);
+    newTipInput.value = ''; // Clear the input field
+  })
+  .catch(error => {
+    console.error('Error adding tip:', error);
+  });
+});
+
 
 fetch('http://localhost:3000/species')
   .then(response => response.json())

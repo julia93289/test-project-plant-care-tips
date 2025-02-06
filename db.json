@@ -22,6 +22,21 @@
     {
       "id": "385",
       "tip": "nbc"
+    },
+    {
+      "id": "123",
+      "tip": "New tip",
+      "species": "roses"
+    },
+    {
+      "id": "123",
+      "tip": "New tip",
+      "species": "roses"
+    },
+    {
+      "id": "9e0d",
+      "tip": "water not too often",
+      "species": "Daisies"
     }
   ],
   "species": [
