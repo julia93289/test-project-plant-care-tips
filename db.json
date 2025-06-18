@@ -3,23 +3,44 @@
     {
       "id": "607",
       "tip": "Give lots of soil",
-      "species": "Roses"
+      "species": "Roses",
+      "upvotes": 9
     },
     {
       "id": "526",
       "tip": "water daily",
-      "species": "Roses"
+      "species": "Roses",
+      "upvotes": 12
     },
-
     {
       "id": "123",
       "tip": "Plant bulbs early",
-      "species": "Tulips"
+      "species": "Tulips",
+      "upvotes": 7
     },
     {
       "id": "9e0d",
       "tip": "Don't water too often",
-      "species": "Daisies"
+      "species": "Daisies",
+      "upvotes": 4
+    },
+    {
+      "id": "cc87",
+      "tip": "Prune regularly for better growth",
+      "species": "Roses",
+      "upvotes": 2
+    },
+    {
+      "id": "a47e",
+      "tip": "Water tulips sparingly in winter",
+      "species": "Tulips",
+      "upvotes": 1
+    },
+    {
+      "id": "7a95",
+      "tip": "Use well-draining soil for tulips",
+      "species": "Tulips",
+      "upvotes": 0
     }
   ],
   "species": [

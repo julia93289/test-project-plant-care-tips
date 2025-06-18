@@ -1,7 +1,17 @@
 // Function to create a tip element
 function createTipElement(tip) {
-  const tipElement = document.createElement('p');
-  tipElement.textContent = tip.tip;
+  const tipElement = document.createElement('div');
+  tipElement.className = 'tip-item';
+  
+  const tipText = document.createElement('p');
+  tipText.textContent = tip.tip;
+  
+  const upvoteCount = document.createElement('span');
+  upvoteCount.className = 'upvote-count';
+  upvoteCount.textContent = `Upvotes: ${tip.upvotes || 0}`;
+
+  const buttonContainer = document.createElement('div');
+  buttonContainer.className = 'button-container';
 
   const upvoteButton = document.createElement('button');
   upvoteButton.textContent = 'Upvote';
@@ -11,25 +21,55 @@ function createTipElement(tip) {
   downvoteButton.textContent = 'Downvote';
   downvoteButton.onclick = () => downvoteTip(tip.id);
 
-  tipElement.appendChild(upvoteButton);
-  tipElement.appendChild(downvoteButton);
+  buttonContainer.appendChild(upvoteCount);
+  buttonContainer.appendChild(upvoteButton);
+  buttonContainer.appendChild(downvoteButton);
+
+  tipElement.appendChild(tipText);
+  tipElement.appendChild(buttonContainer);
 
   return tipElement;
 }
 
 // Function to upvote a tip
 function upvoteTip(id) {
-  fetch(`http://localhost:3000/tips/${id}/upvote`, { method: 'POST' })
+  // First get the current tip data
+  fetch(`http://localhost:12000/tips/${id}`)
       .then(response => response.json())
-      .then(data => console.log('Tip upvoted successfully'))
+      .then(tip => {
+        const newUpvotes = (tip.upvotes || 0) + 1;
+        return fetch(`http://localhost:12000/tips/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ upvotes: newUpvotes })
+        });
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Tip upvoted successfully');
+        loadTips(); // Reload tips to show updated count and sorting
+      })
       .catch(error => console.error('Error upvoting tip:', error));
 }
 
 // Function to downvote a tip
 function downvoteTip(id) {
-  fetch(`http://localhost:3000/tips/${id}/downvote`, { method: 'POST' })
+  // First get the current tip data
+  fetch(`http://localhost:12000/tips/${id}`)
       .then(response => response.json())
-      .then(data => console.log('Tip downvoted successfully'))
+      .then(tip => {
+        const newUpvotes = Math.max((tip.upvotes || 0) - 1, 0); // Don't go below 0
+        return fetch(`http://localhost:12000/tips/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ upvotes: newUpvotes })
+        });
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Tip downvoted successfully');
+        loadTips(); // Reload tips to show updated count and sorting
+      })
       .catch(error => console.error('Error downvoting tip:', error));
 }
 
@@ -40,17 +80,15 @@ function addTip() {
   const selectSpecies = document.getElementById('species-select');
   const selectedSpeciesText = selectSpecies.value;
 
-  fetch('http://localhost:3000/tips', {
+  fetch('http://localhost:12000/tips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tip: newTipText, species: selectedSpeciesText }),
+    body: JSON.stringify({ tip: newTipText, species: selectedSpeciesText, upvotes: 0 }),
   })
       .then(response => response.json())
       .then(data => {
-        const tipsDiv = document.getElementById('tips');
-        const tipElement = createTipElement(data);
-        tipsDiv.appendChild(tipElement);
         newTipInput.value = '';
+        loadTips(); // Reload tips to show the new tip in sorted order
       })
       .catch(error => console.error('Error adding tip:', error));
 }
@@ -60,7 +98,7 @@ function addSpecies() {
   const speciesName = document.getElementById('new-species').value;
   const speciesData = { name: speciesName };
 
-  fetch('http://localhost:3000/species', {
+  fetch('http://localhost:12000/species', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(speciesData),
@@ -71,6 +109,7 @@ function addSpecies() {
         const optionElement = document.createElement('option');
         optionElement.textContent = data.name;
         speciesSelect.appendChild(optionElement);
+        document.getElementById('new-species').value = '';
       });
 }
 
@@ -79,12 +118,15 @@ function loadTips() {
   const selectSpecies = document.getElementById('species-select');
   const selectedSpeciesText = selectSpecies.value;
 
-  fetch(`http://localhost:3000/tips?species=${selectedSpeciesText}`)
+  fetch(`http://localhost:12000/tips?species=${selectedSpeciesText}`)
       .then(response => response.json())
       .then(data => {
+        // Sort tips by upvotes in descending order (highest first)
+        const sortedTips = data.sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+        
         const tipsDiv = document.getElementById('tips');
         tipsDiv.innerHTML = '';
-        data.forEach(tip => {
+        sortedTips.forEach(tip => {
           const tipElement = createTipElement(tip);
           tipsDiv.appendChild(tipElement);
         });
@@ -92,7 +134,7 @@ function loadTips() {
 }
 
 // Load species
-fetch('http://localhost:3000/species')
+fetch('http://localhost:12000/species')
     .then(response => response.json())
     .then(data => {
       const speciesSelect = document.getElementById('species-select');

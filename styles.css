@@ -2,20 +2,56 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     padding: 20px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Mobile-first responsive design */
+* {
+    box-sizing: border-box;
 }
 
 h1 {
     color: #00698f;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* Header buttons container */
+.header-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.header-buttons button {
+    background-color: #00698f;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    flex: 1;
+    min-width: 140px;
+}
+
+.header-buttons button:hover {
+    background-color: #003d5f;
 }
 
 form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 15px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 label {
@@ -23,18 +59,22 @@ label {
 }
 
 input[type="text"] {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
 }
 
 button[type="submit"] {
     background-color: #00698f;
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    width: 100%;
 }
 
 button[type="submit"]:hover {
@@ -42,19 +82,22 @@ button[type="submit"]:hover {
 }
 
 #species-select {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
+    font-size: 16px;
 }
 
 #add-species {
     background-color: #00698f;
     color: #fff;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    width: 100%;
 }
 
 #add-species:hover {
@@ -62,10 +105,11 @@ button[type="submit"]:hover {
 }
 
 #new-species {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
+    font-size: 16px;
 }
 
 #species-select-container {
@@ -74,15 +118,191 @@ button[type="submit"]:hover {
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 #species-select-container h2 {
     margin-top: 0;
+    color: #00698f;
+    font-size: 1.5rem;
 }
 
-#species-select {
-    width: 100%;
-    padding: 10px;
+/* Add new tip and species sections */
+#add-new-tip-section, #add-new-species-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+#add-new-tip-section h2, #add-new-species-section h2 {
+    margin-top: 0;
+    color: #00698f;
+    font-size: 1.5rem;
+}
+
+#new-tip-input, #add-tip-button, #add-species-button {
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#add-tip-button, #add-species-button {
+    background-color: #00698f;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#add-tip-button:hover, #add-species-button:hover {
+    background-color: #003d5f;
+}
+
+.tip-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tip-item p {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.upvote-count {
+    display: inline-block;
+    background-color: #e8f4f8;
+    color: #00698f;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.tip-item button {
+    background-color: #00698f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    min-width: 80px;
+}
+
+.tip-item button:hover {
+    background-color: #003d5f;
+}
+
+.tip-item .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#tips {
+    margin-top: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .header-buttons {
+        flex-direction: column;
+    }
+    
+    .header-buttons button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    #species-select-container, 
+    #add-new-tip-section, 
+    #add-new-species-section {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .tip-item {
+        padding: 12px;
+        margin: 8px 0;
+    }
+    
+    .tip-item p {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+    
+    .upvote-count {
+        font-size: 13px;
+        padding: 4px 8px;
+        margin-bottom: 8px;
+        display: block;
+        width: fit-content;
+    }
+    
+    .tip-item .button-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .tip-item button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 8px;
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 15px;
+    }
+    
+    #species-select-container, 
+    #add-new-tip-section, 
+    #add-new-species-section {
+        padding: 12px;
+        margin-top: 12px;
+    }
+    
+    .tip-item {
+        padding: 10px;
+        margin: 6px 0;
+    }
+    
+    .tip-item p {
+        font-size: 14px;
+    }
+    
+    .upvote-count {
+        font-size: 12px;
+    }
 }
