@@ -3,6 +3,11 @@ function createTipElement(tip) {
   const tipElement = document.createElement('p');
   tipElement.textContent = tip.tip;
 
+  // Add upvote count
+  const upvoteCount = document.createElement('span');
+  upvoteCount.textContent = ` (Upvotes: ${tip.upvotes || 0})`;
+  tipElement.appendChild(upvoteCount);
+
   const upvoteButton = document.createElement('button');
   upvoteButton.textContent = 'Upvote';
   upvoteButton.onclick = () => upvoteTip(tip.id);
@@ -84,6 +89,8 @@ function loadTips() {
       .then(data => {
         const tipsDiv = document.getElementById('tips');
         tipsDiv.innerHTML = '';
+        // Sort tips by upvotes in descending order
+        data.sort((a, b) => b.upvotes - a.upvotes);
         data.forEach(tip => {
           const tipElement = createTipElement(tip);
           tipsDiv.appendChild(tipElement);
