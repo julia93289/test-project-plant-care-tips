@@ -24,7 +24,7 @@ function createTipElement(tip) {
 
 // Function to upvote a tip
 function upvoteTip(id) {
-  fetch(`http://localhost:3000/tips/${id}/upvote`, { method: 'POST' })
+  fetch(`http://localhost:50941/tips/${id}/upvote`, { method: 'POST' })
       .then(response => response.json())
       .then(data => console.log('Tip upvoted successfully'))
       .catch(error => console.error('Error upvoting tip:', error));
@@ -32,7 +32,7 @@ function upvoteTip(id) {
 
 // Function to downvote a tip
 function downvoteTip(id) {
-  fetch(`http://localhost:3000/tips/${id}/downvote`, { method: 'POST' })
+  fetch(`http://localhost:50941/tips/${id}/downvote`, { method: 'POST' })
       .then(response => response.json())
       .then(data => console.log('Tip downvoted successfully'))
       .catch(error => console.error('Error downvoting tip:', error));
@@ -45,7 +45,7 @@ function addTip() {
   const selectSpecies = document.getElementById('species-select');
   const selectedSpeciesText = selectSpecies.value;
 
-  fetch('http://localhost:3000/tips', {
+  fetch('http://localhost:50941/tips', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ tip: newTipText, species: selectedSpeciesText }),
@@ -65,7 +65,7 @@ function addSpecies() {
   const speciesName = document.getElementById('new-species').value;
   const speciesData = { name: speciesName };
 
-  fetch('http://localhost:3000/species', {
+  fetch('http://localhost:50941/species', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(speciesData),
@@ -84,7 +84,7 @@ function loadTips() {
   const selectSpecies = document.getElementById('species-select');
   const selectedSpeciesText = selectSpecies.value;
 
-  fetch(`http://localhost:3000/tips?species=${selectedSpeciesText}`)
+  fetch(`http://localhost:50941/tips?species=${selectedSpeciesText}`)
       .then(response => response.json())
       .then(data => {
         const tipsDiv = document.getElementById('tips');
@@ -95,11 +95,12 @@ function loadTips() {
           const tipElement = createTipElement(tip);
           tipsDiv.appendChild(tipElement);
         });
-      });
+      })
+      .catch(error => console.error('Error loading tips:', error));
 }
 
 // Load species
-fetch('http://localhost:3000/species')
+fetch('http://localhost:50941/species')
     .then(response => response.json())
     .then(data => {
       const speciesSelect = document.getElementById('species-select');
@@ -108,7 +109,8 @@ fetch('http://localhost:3000/species')
         optionElement.textContent = species.name;
         speciesSelect.appendChild(optionElement);
       });
-    });
+    })
+    .catch(error => console.error('Error loading species:', error));
 
 // Event listeners
 document.getElementById('species-select').addEventListener('change', loadTips);
